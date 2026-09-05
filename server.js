@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const PUBLIC_DIR = __dirname;
 
 const MIME_TYPES = {
@@ -16,7 +16,8 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-    let filePath = path.join(PUBLIC_DIR, req.url === '/' ? 'pranav-invoice.html' : req.url);
+    let requestedUrl = req.url === '/' ? 'index.html' : req.url;
+    let filePath = path.join(PUBLIC_DIR, requestedUrl);
     filePath = decodeURIComponent(filePath);
 
     fs.stat(filePath, (err, stats) => {
@@ -38,5 +39,6 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}/pranav-invoice.html`);
+    console.log(`Server running at http://localhost:${PORT}/`);
 });
+
