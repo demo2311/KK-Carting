@@ -1,0 +1,14 @@
+{
+  "name": "kk-carting-invoice",
+  "version": "1.0.0",
+  "description": "Invoice Generator for Gohil Kalpeshkumar Laxmanbhai - KK Carting",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo \"No build step needed for static HTML app.\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
