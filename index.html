@@ -214,15 +214,237 @@
             background: linear-gradient(90deg, var(--brand-orange) 0%, #c73d10 100%);
             color: #fff;
         }
+
+        /* Mobile & Responsive Layout Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            background-color: #f0f2f5;
+        }
+
+        #mobile-nav {
+            display: none;
+        }
+
+        #form-panel {
+            width: 40%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            background: #fff;
+            border-right: 3px solid var(--brand-orange);
+        }
+
+        #preview-panel {
+            width: 60%;
+            height: 100%;
+            background: #3a3a3a;
+            overflow-y: auto;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #preview-scaler-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        #preview-scaler {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: top center;
+            transition: transform 0.15s ease-out;
+        }
+
+        .form-row-2col {
+            display: flex;
+            gap: 10px;
+        }
+
+        .mobile-only-preview-btn {
+            display: none;
+        }
+
+        @media print {
+            #mobile-nav,
+            .mobile-only-preview-btn {
+                display: none !important;
+            }
+
+            #preview-scaler-wrapper,
+            #preview-scaler {
+                transform: none !important;
+                width: 100% !important;
+                height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+
+        @media screen and (max-width: 991px) {
+            body {
+                flex-direction: column;
+            }
+
+            #mobile-nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: #1a1a1a;
+                color: #fff;
+                padding: 8px 12px;
+                border-bottom: 2px solid var(--brand-orange);
+                z-index: 100;
+                flex-shrink: 0;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            }
+
+            .mobile-brand-title {
+                font-size: 13px;
+                font-weight: 700;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .mobile-tabs {
+                display: flex;
+                background: #2b2b2b;
+                border-radius: 6px;
+                padding: 3px;
+                gap: 3px;
+            }
+
+            .mobile-tab-btn {
+                border: none;
+                background: transparent;
+                color: #bbb;
+                padding: 6px 14px;
+                font-size: 12px;
+                font-weight: 600;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+
+            .mobile-tab-btn.active {
+                background: var(--brand-orange);
+                color: #fff;
+                box-shadow: 0 2px 6px rgba(232, 76, 28, 0.4);
+            }
+
+            .mobile-pdf-btn {
+                background: var(--brand-teal);
+                color: #fff;
+                border: none;
+                padding: 6px 12px;
+                font-size: 12px;
+                font-weight: 600;
+                border-radius: 4px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+            #form-panel {
+                width: 100% !important;
+                height: calc(100vh - 52px) !important;
+                height: calc(100dvh - 52px) !important;
+                border-right: none !important;
+                padding: 15px !important;
+            }
+
+            #preview-panel {
+                width: 100% !important;
+                height: calc(100vh - 52px) !important;
+                height: calc(100dvh - 52px) !important;
+                padding: 15px 8px !important;
+                overflow-x: auto !important;
+                background: #2b2b2b !important;
+            }
+
+            body.mobile-tab-edit #preview-panel {
+                display: none !important;
+            }
+
+            body.mobile-tab-edit #form-panel {
+                display: block !important;
+            }
+
+            body.mobile-tab-preview #form-panel {
+                display: none !important;
+            }
+
+            body.mobile-tab-preview #preview-panel {
+                display: flex !important;
+            }
+
+            .mobile-only-preview-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                background: linear-gradient(135deg, var(--brand-teal), #169b7c);
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 600;
+                width: 100%;
+                border-radius: 4px;
+                margin-top: 12px;
+                box-shadow: 0 3px 10px rgba(29, 200, 160, 0.3);
+            }
+        }
+
+        @media screen and (max-width: 575px) {
+            .form-row-2col {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+        }
     </style>
 </head>
 
-<body
-    style="margin: 0; padding: 0; font-family: 'Poppins', sans-serif; display: flex; height: 100vh; overflow: hidden; background-color: #f0f2f5;">
+<body class="mobile-tab-edit">
+
+    <!-- MOBILE TOP NAVIGATION -->
+    <div id="mobile-nav">
+        <div class="mobile-brand-title">
+            📄 Invoice
+        </div>
+        <div class="mobile-tabs">
+            <button type="button" id="tab-btn-edit" class="mobile-tab-btn active" onclick="switchMobileTab('edit')">
+                ✏️ Edit
+            </button>
+            <button type="button" id="tab-btn-preview" class="mobile-tab-btn" onclick="switchMobileTab('preview')">
+                👁️ Preview
+            </button>
+        </div>
+        <button type="button" class="mobile-pdf-btn" onclick="downloadPdf()">
+            ⬇ PDF
+        </button>
+    </div>
 
     <!-- LEFT: FORM -->
-    <div id="form-panel"
-        style="width: 40%; height: 100%; overflow-y: auto; padding: 20px; box-sizing: border-box; background: #fff; border-right: 3px solid var(--brand-orange);">
+    <div id="form-panel">
 
         <div
             style="display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--brand-orange); padding-bottom: 10px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
@@ -465,14 +687,18 @@
             <button type="button" onclick="downloadPdf()"
                 style="background: linear-gradient(135deg, var(--brand-orange), #c73d10); color: white; border: none; padding: 12px 25px; cursor: pointer; font-size: 16px; font-weight: 600; width: 100%; letter-spacing: 0.03em; box-shadow: 0 3px 10px rgba(232,76,28,0.35); border-radius: 4px;">⬇
                 Download PDF</button>
+
+            <button type="button" onclick="switchMobileTab('preview')" class="mobile-only-preview-btn">
+                👁️ Switch to Preview
+            </button>
         </div>
     </div>
 
     <!-- RIGHT: PREVIEW -->
-    <div id="preview-panel"
-        style="width: 60%; height: 100%; background: #3a3a3a; overflow-y: auto; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 20px;">
-
-        <div id="invoice-pdf-wrapper" style="width: 210mm; display: flex; flex-direction: column; gap: 20px;">
+    <div id="preview-panel">
+        <div id="preview-scaler-wrapper">
+            <div id="preview-scaler">
+                <div id="invoice-pdf-wrapper" style="width: 210mm; display: flex; flex-direction: column; gap: 20px;">
 
             <!-- PAGE 1 -->
             <div id="invoice-page-1" style="
@@ -688,18 +914,69 @@
                 <div style="margin-bottom: 12px;">
                     <span style="font-weight: 600; font-size: 12px;">Payment Terms:</span>
                     <span id="prev-time-limit" style="margin-left: 6px; font-size: 12px;"></span>
-                </div>
-                <div>
                     <div style="font-size: 12px; font-weight: 600; margin-bottom: 6px;">Terms &amp; Conditions:</div>
                     <ol id="prev-terms"
                         style="padding-left: 18px; margin: 0; font-size: 12px; line-height: 1.8; color: #333;"></ol>
                 </div>
             </div>
-
         </div>
+    </div>
     </div>
 
     <script>
+        let currentMobileTab = 'edit';
+
+        function switchMobileTab(tab) {
+            currentMobileTab = tab;
+            if (tab === 'edit') {
+                document.body.classList.add('mobile-tab-edit');
+                document.body.classList.remove('mobile-tab-preview');
+                const btnEdit = document.getElementById('tab-btn-edit');
+                const btnPrev = document.getElementById('tab-btn-preview');
+                if (btnEdit) btnEdit.classList.add('active');
+                if (btnPrev) btnPrev.classList.remove('active');
+            } else {
+                document.body.classList.add('mobile-tab-preview');
+                document.body.classList.remove('mobile-tab-edit');
+                const btnEdit = document.getElementById('tab-btn-edit');
+                const btnPrev = document.getElementById('tab-btn-preview');
+                if (btnPrev) btnPrev.classList.add('active');
+                if (btnEdit) btnEdit.classList.remove('active');
+                setTimeout(updateMobilePreviewScale, 50);
+            }
+        }
+
+        function updateMobilePreviewScale() {
+            const previewPanel = document.getElementById('preview-panel');
+            const scaler = document.getElementById('preview-scaler');
+            const wrapper = document.getElementById('preview-scaler-wrapper');
+
+            if (!previewPanel || !scaler || !wrapper) return;
+
+            if (window.innerWidth < 992) {
+                const style = window.getComputedStyle(previewPanel);
+                const paddingLeft = parseFloat(style.paddingLeft) || 8;
+                const paddingRight = parseFloat(style.paddingRight) || 8;
+                const availableWidth = previewPanel.clientWidth - paddingLeft - paddingRight - 4;
+
+                const targetWidth = 793.7; // 210mm in px at 96dpi
+                const scale = Math.min(1, Math.max(0.3, availableWidth / targetWidth));
+
+                scaler.style.transform = `scale(${scale})`;
+                scaler.style.transformOrigin = 'top center';
+
+                const unscaledHeight = scaler.offsetHeight;
+                if (unscaledHeight > 0) {
+                    wrapper.style.height = (unscaledHeight * scale + 20) + 'px';
+                }
+            } else {
+                scaler.style.transform = 'none';
+                wrapper.style.height = 'auto';
+            }
+        }
+
+        window.addEventListener('resize', updateMobilePreviewScale);
+
         const statesByCountry = {
             'India': [
                 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand',
@@ -751,6 +1028,7 @@
             renderItemsForm();
             renderTermsForm();
             updatePreview();
+            updateMobilePreviewScale();
         };
 
         function addItem() {
@@ -1170,6 +1448,8 @@
                 li.textContent = term;
                 termsList.appendChild(li);
             });
+
+            updateMobilePreviewScale();
         }
 
         function escapeHtml(str) {
