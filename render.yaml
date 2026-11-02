@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: kk-carting-invoice
+    env: node
+    region: singapore
+    plan: free
+    buildCommand: ""
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 8080

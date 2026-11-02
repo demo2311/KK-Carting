@@ -8,6 +8,9 @@
     "dev": "node server.js",
     "build": "echo \"No build step needed for static HTML app.\""
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
